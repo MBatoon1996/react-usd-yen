@@ -11,13 +11,21 @@ const toUsd = (amount, rate) => {
 }
 */
 
+class CurrencyInput extends React.Component {
+    render() {
+        const { value, handleChange } = this.props;
+
+        return <input value={value} onChange={handleChange} type="number" />
+    }
+}
+
 class CurrencyConverter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            rate: 105.840152870,
+            rate: 105.8160367502,
             usd: 1,
-            yen: 1 * 105.840152870,
+            yen: 1 * 105.8160367502,
         };
 
         this.handleUsdChange = this.handleUsdChange.bind(this);
@@ -91,9 +99,9 @@ class CurrencyConverter extends React.Component {
                 <div className="row text-center">
                     <div className="col-12">
                         <span className="mr-2">USD</span>
-                        <input value={usd} onChange={this.handleUsdChange} type="number" />
+                        <CurrencyInput value={usd} handleChange={this.handleUsdChange} />
                         <span className="mx-3">=</span>
-                        <input value={yen} onChange={this.handleYenChange} type="number" />
+                        <CurrencyInput value={yen} handleChange={this.handleYenChange} />
                         <span className="ml-1">YEN</span>
                     </div>
                 </div>
