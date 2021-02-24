@@ -32,6 +32,9 @@ var CurrencyConverter = function (_React$Component) {
             usd: 1,
             yen: 1 * 105.840152870
         };
+
+        _this.handleUsdChange = _this.handleUsdChange.bind(_this);
+        _this.handleYenChange = _this.handleYenChange.bind(_this);
         return _this;
     }
 
@@ -44,6 +47,54 @@ var CurrencyConverter = function (_React$Component) {
         key: "toYen",
         value: function toYen(amount, rate) {
             return amount * rate;
+        }
+    }, {
+        key: "convert",
+        value: function convert(amount, rate, equation) {
+            var input = parseFloat(amount);
+            if (Number.isNaN(input)) {
+                return '';
+            }
+            return equation(input, rate).toFixed(3);
+        }
+    }, {
+        key: "handleUsdChange",
+        value: function handleUsdChange(event) {
+            /* ---- Moved to convert function -----
+            const input = parseFloat(event.target.value);
+            if(Number.isNaN(input)) {
+                this.setState({
+                    usd: '',
+                    yen: '',
+                });
+                 return; // early return
+            }
+            */
+            var yen = this.convert(event.target.value, this.state.rate, this.toYen);
+            this.setState({
+                usd: event.target.value,
+                yen: yen
+            });
+        }
+    }, {
+        key: "handleYenChange",
+        value: function handleYenChange(event) {
+            /* ----- Moved to convert function ------
+            const input = parseFloat(event.target.value);
+            if(Number.isNaN(input)) {
+                this.setState({
+                    usd: '',
+                    yen: '',
+                });
+                 return; // early return
+            }
+            */
+
+            var usd = this.convert(event.target.value, this.state.rate, this.toUsd);
+            this.setState({
+                yen: event.target.value,
+                usd: usd
+            });
         }
     }, {
         key: "render",

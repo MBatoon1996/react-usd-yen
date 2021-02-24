@@ -19,6 +19,9 @@ class CurrencyConverter extends React.Component {
             usd: 1,
             yen: 1 * 105.840152870,
         };
+
+        this.handleUsdChange = this.handleUsdChange.bind(this);
+        this.handleYenChange = this.handleYenChange.bind(this);
     }
 
     toUsd(amount, rate) {
@@ -27,6 +30,53 @@ class CurrencyConverter extends React.Component {
 
     toYen(amount, rate) {
         return amount * rate;
+    }
+
+    convert(amount, rate, equation) {
+        const input = parseFloat(amount);
+        if(Number.isNaN(input)) {
+            return '';
+        }
+        return equation(input, rate).toFixed(3);
+    }
+
+    handleUsdChange(event) {
+        /* ---- Moved to convert function -----
+        const input = parseFloat(event.target.value);
+        if(Number.isNaN(input)) {
+            this.setState({
+                usd: '',
+                yen: '',
+            });
+
+            return; // early return
+        }
+        */
+        const yen = this.convert(event.target.value, this.state.rate, this.toYen);
+        this.setState({
+            usd: event.target.value,
+            yen
+        });
+    }
+
+    handleYenChange(event) {
+        /* ----- Moved to convert function ------
+        const input = parseFloat(event.target.value);
+        if(Number.isNaN(input)) {
+            this.setState({
+                usd: '',
+                yen: '',
+            });
+
+            return; // early return
+        }
+        */
+
+        const usd = this.convert(event.target.value, this.state.rate, this.toUsd);
+        this.setState({
+            yen: event.target.value,
+            usd
+        });
     }
 
     render() {
