@@ -19,23 +19,47 @@ const toUsd = (amount, rate) => {
 }
 */
 
-var CurrencyConverter = function (_React$Component) {
-    _inherits(CurrencyConverter, _React$Component);
+var CurrencyInput = function (_React$Component) {
+    _inherits(CurrencyInput, _React$Component);
+
+    function CurrencyInput() {
+        _classCallCheck(this, CurrencyInput);
+
+        return _possibleConstructorReturn(this, (CurrencyInput.__proto__ || Object.getPrototypeOf(CurrencyInput)).apply(this, arguments));
+    }
+
+    _createClass(CurrencyInput, [{
+        key: "render",
+        value: function render() {
+            var _props = this.props,
+                value = _props.value,
+                handleChange = _props.handleChange;
+
+
+            return React.createElement("input", { value: value, onChange: handleChange, type: "number" });
+        }
+    }]);
+
+    return CurrencyInput;
+}(React.Component);
+
+var CurrencyConverter = function (_React$Component2) {
+    _inherits(CurrencyConverter, _React$Component2);
 
     function CurrencyConverter(props) {
         _classCallCheck(this, CurrencyConverter);
 
-        var _this = _possibleConstructorReturn(this, (CurrencyConverter.__proto__ || Object.getPrototypeOf(CurrencyConverter)).call(this, props));
+        var _this2 = _possibleConstructorReturn(this, (CurrencyConverter.__proto__ || Object.getPrototypeOf(CurrencyConverter)).call(this, props));
 
-        _this.state = {
-            rate: 105.840152870,
+        _this2.state = {
+            rate: 105.8160367502,
             usd: 1,
-            yen: 1 * 105.840152870
+            yen: 1 * 105.8160367502
         };
 
-        _this.handleUsdChange = _this.handleUsdChange.bind(_this);
-        _this.handleYenChange = _this.handleYenChange.bind(_this);
-        return _this;
+        _this2.handleUsdChange = _this2.handleUsdChange.bind(_this2);
+        _this2.handleYenChange = _this2.handleYenChange.bind(_this2);
+        return _this2;
     }
 
     _createClass(CurrencyConverter, [{
@@ -135,13 +159,13 @@ var CurrencyConverter = function (_React$Component) {
                             { className: "mr-2" },
                             "USD"
                         ),
-                        React.createElement("input", { value: usd, onChange: this.handleUsdChange, type: "number" }),
+                        React.createElement(CurrencyInput, { value: usd, handleChange: this.handleUsdChange }),
                         React.createElement(
                             "span",
                             { className: "mx-3" },
                             "="
                         ),
-                        React.createElement("input", { value: yen, onChange: this.handleYenChange, type: "number" }),
+                        React.createElement(CurrencyInput, { value: yen, handleChange: this.handleYenChange }),
                         React.createElement(
                             "span",
                             { className: "ml-1" },
